@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { ScrambledWord } from './ScrambledWord';
 import words from 'word-list-json';
-import { selectRandomNumber } from '../helpers/random';
+import { selectRandomNumber, scrambleWord } from '../helpers/random';
 
 export default class Quiz extends Component {
   constructor() {
     super();
     this.state = {
       currentWord: '',
+      scrambledWord: '',
       currentGuess: ''
     };
   }
@@ -26,12 +27,15 @@ export default class Quiz extends Component {
           className="start-button"
           onClick={() => {
             let random = selectRandomNumber(words.length);
-            return this.setState({ currentWord: words[random] });
+            return this.setState({
+              currentWord: words[random],
+              scrambledWord: scrambleWord(words[random])
+            });
           }}
         >
           Start
         </button>
-        <ScrambledWord word={this.state.currentWord} />
+        <ScrambledWord word={this.state.scrambledWord} />
         <input
           className="guess-input"
           placeholder="Enter your answer here"
