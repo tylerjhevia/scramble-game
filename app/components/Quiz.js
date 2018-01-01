@@ -12,6 +12,13 @@ export default class Quiz extends Component {
     };
   }
 
+  checkAnswer() {
+    if (this.state.currentWord === this.state.currentGuess) {
+      return alert('Correct!');
+    } else {
+      return alert('WRONG!');
+    }
+  }
   render() {
     return (
       <div className="quiz-container">
@@ -30,7 +37,9 @@ export default class Quiz extends Component {
           placeholder="Enter your answer here"
           onChange={e => this.setState({ currentGuess: e.target.value })}
         />
-        <button className="submit-button">Submit Answer</button>
+        <button className="submit-button" onClick={() => this.checkAnswer()}>
+          Submit Answer
+        </button>
       </div>
     );
   }
