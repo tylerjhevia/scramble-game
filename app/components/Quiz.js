@@ -7,7 +7,8 @@ export default class Quiz extends Component {
   constructor() {
     super();
     this.state = {
-      currentWord: ''
+      currentWord: '',
+      currentGuess: ''
     };
   }
 
@@ -24,6 +25,12 @@ export default class Quiz extends Component {
           Start
         </button>
         <ScrambledWord word={this.state.currentWord} />
+        <input
+          className="guess-input"
+          placeholder="Enter your answer here"
+          onChange={e => this.setState({ currentGuess: e.target.value })}
+        />
+        <button className="submit-button">Submit Answer</button>
       </div>
     );
   }
