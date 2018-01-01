@@ -3,3 +3,5 @@ export const selectRandomNumber = max => {
 };
 
 export const selectRandomWord = words => {};
+
+export const scrambleWord = word => {};
