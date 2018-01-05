@@ -69,6 +69,9 @@ export default class Quiz extends Component {
         <button className="submit-button" onClick={() => this.checkAnswer()}>
           Submit Answer
         </button>
+        <p className="score-display">
+          {this.state.score}
+        </p>
       </div>
     );
   }
