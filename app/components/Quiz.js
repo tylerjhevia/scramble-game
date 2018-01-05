@@ -11,15 +11,19 @@ export default class Quiz extends Component {
       wordBank: words,
       currentWord: '',
       scrambledWord: '',
-      currentGuess: ''
+      currentGuess: '',
+      score: 0
     };
   }
 
   checkAnswer() {
+    let currentScore = this.state.score;
     if (this.state.currentWord === this.state.currentGuess) {
-      return alert('Correct!');
+      currentScore += 1;
+      this.setState({ score: currentScore });
     } else {
-      return alert('WRONG!');
+      currentScore -= 1;
+      this.setState({ score: currentScore });
     }
   }
   render() {
@@ -65,6 +69,9 @@ export default class Quiz extends Component {
         <button className="submit-button" onClick={() => this.checkAnswer()}>
           Submit Answer
         </button>
+        <p className="score-display">
+          {this.state.score}
+        </p>
       </div>
     );
   }
