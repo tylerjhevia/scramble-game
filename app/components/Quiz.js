@@ -17,10 +17,13 @@ export default class Quiz extends Component {
   }
 
   checkAnswer() {
+    let currentScore = this.state.score;
     if (this.state.currentWord === this.state.currentGuess) {
-      return alert('Correct!');
+      currentScore += 1;
+      this.setState({ score: currentScore });
     } else {
-      return alert('WRONG!');
+      currentScore -= 1;
+      this.setState({ score: currentScore });
     }
   }
   render() {
