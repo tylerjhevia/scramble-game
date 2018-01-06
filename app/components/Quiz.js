@@ -22,6 +22,7 @@ export default class Quiz extends Component {
     if (this.state.currentWord === this.state.currentGuess) {
       currentScore += 1;
       this.setState({ score: currentScore, feedback: 'Correct!' });
+      this.pickRandomWord();
     } else {
       currentScore -= 1;
       this.setState({ score: currentScore, feedback: 'Wrong! Try again!' });
