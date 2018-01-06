@@ -21,25 +21,25 @@ export default class Quiz extends Component {
     let currentScore = this.state.score;
     if (this.state.currentWord === this.state.currentGuess) {
       currentScore += 1;
-      this.setState({ score: currentScore });
+      this.setState({ score: currentScore, feedback: 'Correct!' });
     } else {
       currentScore -= 1;
-      this.setState({ score: currentScore });
+      this.setState({ score: currentScore, feedback: 'Wrong! Try again!' });
     }
   }
+
+  pickRandomWord() {
+    let random = selectRandomNumber(this.state.wordBank.length);
+    return this.setState({
+      currentWord: this.state.wordBank[random],
+      scrambledWord: scrambleWord(this.state.wordBank[random])
+    });
+  }
+
   render() {
     return (
       <div className="quiz-container">
-        <button
-          className="start-button"
-          onClick={() => {
-            let random = selectRandomNumber(this.state.wordBank.length);
-            return this.setState({
-              currentWord: this.state.wordBank[random],
-              scrambledWord: scrambleWord(this.state.wordBank[random])
-            });
-          }}
-        >
+        <button className="start-button" onClick={() => this.pickRandomWord()}>
           Start
         </button>
 
