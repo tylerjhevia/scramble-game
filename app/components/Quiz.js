@@ -27,6 +27,7 @@ export default class Quiz extends Component {
       currentScore -= 1;
       this.setState({ score: currentScore, feedback: 'Wrong! Try again!' });
     }
+    this.setState({ currentGuess: '' });
   }
 
   pickRandomWord() {
@@ -67,6 +68,7 @@ export default class Quiz extends Component {
           className="guess-input"
           placeholder="Enter your answer here"
           onChange={e => this.setState({ currentGuess: e.target.value })}
+          value={this.state.currentGuess}
         />
         <button className="submit-button" onClick={() => this.checkAnswer()}>
           Submit Answer
