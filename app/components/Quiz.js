@@ -12,7 +12,8 @@ export default class Quiz extends Component {
       currentWord: '',
       scrambledWord: '',
       currentGuess: '',
-      score: 0
+      score: 0,
+      feedback: ''
     };
   }
 
