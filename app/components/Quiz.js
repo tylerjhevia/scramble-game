@@ -12,7 +12,8 @@ export default class Quiz extends Component {
       currentWord: '',
       scrambledWord: '',
       currentGuess: '',
-      score: 0
+      score: 0,
+      feedback: ''
     };
   }
 
@@ -20,25 +21,27 @@ export default class Quiz extends Component {
     let currentScore = this.state.score;
     if (this.state.currentWord === this.state.currentGuess) {
       currentScore += 1;
-      this.setState({ score: currentScore });
+      this.setState({ score: currentScore, feedback: 'Correct!' });
+      this.pickRandomWord();
     } else {
       currentScore -= 1;
-      this.setState({ score: currentScore });
+      this.setState({ score: currentScore, feedback: 'Wrong! Try again!' });
     }
+    this.setState({ currentGuess: '' });
   }
+
+  pickRandomWord() {
+    let random = selectRandomNumber(this.state.wordBank.length);
+    return this.setState({
+      currentWord: this.state.wordBank[random],
+      scrambledWord: scrambleWord(this.state.wordBank[random])
+    });
+  }
+
   render() {
     return (
       <div className="quiz-container">
-        <button
-          className="start-button"
-          onClick={() => {
-            let random = selectRandomNumber(this.state.wordBank.length);
-            return this.setState({
-              currentWord: this.state.wordBank[random],
-              scrambledWord: scrambleWord(this.state.wordBank[random])
-            });
-          }}
-        >
+        <button className="start-button" onClick={() => this.pickRandomWord()}>
           Start
         </button>
 
@@ -65,10 +68,14 @@ export default class Quiz extends Component {
           className="guess-input"
           placeholder="Enter your answer here"
           onChange={e => this.setState({ currentGuess: e.target.value })}
+          value={this.state.currentGuess}
         />
         <button className="submit-button" onClick={() => this.checkAnswer()}>
           Submit Answer
         </button>
+        <p className="feedback">
+          {this.state.feedback}
+        </p>
         <p className="score-display">
           {this.state.score}
         </p>
